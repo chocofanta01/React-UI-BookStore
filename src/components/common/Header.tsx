@@ -1,41 +1,32 @@
 import styled from "styled-components";
 import logo from '../../assets/images/logo.png'
+import { Link } from "react-router-dom";
 // 리액트 아이콘 v19와 호환성 문제..
 // import {FaSignInAlt, FaRegUser} from 'react-icons/fa'
+import { useEffect, useState } from "react";
+import { Category } from "../../models/category.model";
+import { fetchCategory } from "../../api/category.api";
+import { useCategory } from "../../hooks/useCategory";
 
-const CATEGORY = [
-    {
-        id: null,
-        name: '전체',
-    },
-    {
-        id: 0,
-        name: '동화',
-    },
-    {
-        id: 1,
-        name: '소설',
-    },
-    {
-        id: 2,
-        name: '사회',
-    },
-]
 
 function Header() {
+    const { category } = useCategory();
+
     return (
         <HeaderStyle>
             <h1 className="logo">
-                <img src={logo} alt="book store" />
+                <Link to="/">
+                    <img src={logo} alt="book store" />
+                </Link>
             </h1>
             <nav className="category">
                 <ul>
-                    {CATEGORY.map((item) => (
+                    {category.map((item) => (
                         <li key={item.id}>
                             {/* 링크를 위한 a 태그, 쿼리스트링 이용*/}
-                            <a href={item.id === null ? '/books' : `/books?category_id=${item.id}`}>
+                            <Link to={item.id === null ? '/books' : `/books?category_id=${item.id}`}>
                                 {item.name}
-                            </a>
+                            </Link>
                         </li>
                     ))}
                 </ul>
