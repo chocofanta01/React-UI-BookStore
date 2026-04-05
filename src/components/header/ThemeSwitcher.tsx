@@ -1,34 +1,37 @@
-import { useContext } from "react"
-// import { ThemeName } from "../../style/theme"
-import { ThemeContext } from "../../context/themeContext"
+import { useContext } from "react";
+import { ThemeContext } from "../../context/themeContext";
+import { FaSun, FaMoon } from "react-icons/fa";
+import styled from "styled-components";
 
 function ThemeSwitcher() {
-    const { themeName, toggleTheme } = useContext(ThemeContext);
-    return (
-        <button onClick={toggleTheme}>
-            {themeName}
-        </button>
-    )
+  const { themeName, toggleTheme } = useContext(ThemeContext);
+  return (
+      <ThemeSwitcherStyle onClick={toggleTheme}>
+        {themeName === "light" ? <FaMoon /> : <FaSun />}
+        <span>{themeName}</span>
+      </ThemeSwitcherStyle>
+  );
 }
 
-// // themeName으로 light 또는 dark 값 받고 setThemeName으로 테마 설정해준다.
-// interface Props {
-//     themeName: ThemeName;
-//     setThemeName: (themeName: ThemeName) => void;
-// }
+const ThemeSwitcherStyle = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid ${({ theme }) => theme.color.border};
+  border-radius: 20px;
+  padding: 4px 12px;
+  cursor: pointer;
+  color: ${({ theme }) => theme.color.text};
+  font-weight: 600;
+  
+  &:hover {
+    background-color: ${({ theme }) => theme.color.background};
+  }
 
-// function ThemeSwitcher({themeName, setThemeName} : Props) {
+  svg {
+    color: ${({ theme }) => theme.color.primary};
+  }
+`;
 
-//     // light일 경우 dark로 아닐경우 light로!
-//     const toggleTheme = () => {
-//         setThemeName(themeName === 'light' ? 'dark' : 'light')
-//     }
-
-//     return (
-//         <button onClick={toggleTheme}>
-//             {themeName}
-//         </button>
-//     )
-// }
-
-export default ThemeSwitcher
+export default ThemeSwitcher;

@@ -1,19 +1,29 @@
-import Header from "../common/Header"
-import Fotter from "../common/Footer"
+import styled from "styled-components";
+import Footer from "../common/Footer";
+import Header from "../common/Header";
 
 interface LayoutProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 function Layout({ children }: LayoutProps) {
-    return (
-        <>
-            <Header />
-            <main>
-                {children}
-            </main>
-            <Fotter />
-        </>
-    );
+  return (
+    <>
+      <Header />
+      <LayoutStyle>
+        {children}
+      </LayoutStyle>
+      <Footer />
+    </>
+  );
 }
+
+const LayoutStyle = styled.main`
+  width: 100%;
+  margin: 0 auto;
+  max-width: ${({ theme }) => theme.layout.width.large};
+  padding: 40px 0;
+  min-height: 100vh;
+`;
+
 export default Layout;

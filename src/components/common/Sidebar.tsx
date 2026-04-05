@@ -1,9 +1,12 @@
+import styled from "styled-components";
+
 function Sidebar() {
-    return (
-        <div>
-            사이드바
-        </div>
-    )
+  return <SidebarStyle>사이드바</SidebarStyle>;
 }
 
-export default Sidebar
+const SidebarStyle = styled.aside`
+  padding: 1rem;
+  color: ${({ theme }) => theme.color.text};
+`;
+
+export default Sidebar;
